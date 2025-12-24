@@ -6,14 +6,14 @@ const appRoute = require("@/routes");
 
 const port = process.env.PORT || 3000;
 
-let allowOrigins = ["http://localhost:5173"];
+const ALLOWED_ORIGIN = process.env.CLIENT_URL || "http://localhost:5173";
 
 let allowMethods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"];
 
 let corsOptions = {
     origin: function (origin, callback) {
         if (!origin) return callback(null, true);
-        if (allowOrigins.includes(origin)) {
+        if (ALLOWED_ORIGIN.includes(origin)) {
             callback(null, true);
         } else {
             callback(new Error("Not allow by CORS"));
